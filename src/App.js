@@ -40,22 +40,22 @@ const defaultText = `
 
 class App extends React.Component{
 
-    state = {
-      input: defaultText
-    }
+  // Initializing default state of input value which is assigned to textarea value
+  constructor(props){
+    super(props);
+    this.state = {input: defaultText};
+  }
 
-    handleChange = (event) => {
-      this.setState({
-        input: event.target.value
-      })
-    }
-
-
+  // Function that changes the state of input value
+  // event.target.value gets value inserted in input field (textarea)
+  handleChange = (event) => {
+    this.setState({
+      input: event.target.value
+    })
+  }
 
   render() {
-    const {input} = this.state;
-
-    const markdown = marked(input, {breaks: true});
+    const markdown = marked(this.state.input, {breaks: true});
 
     return (
       <div className="App">
@@ -64,9 +64,7 @@ class App extends React.Component{
             <div className="section-header">
               <h1>Editor</h1>
             </div>
-            <textarea id="editor" value={this.state.input} onChange={this.handleChange}>
-  
-            </textarea>
+            <textarea id="editor" value={this.state.input} onChange={this.handleChange} />
           </section>
           <section className="previewer-area">
           <div className="section-header">
